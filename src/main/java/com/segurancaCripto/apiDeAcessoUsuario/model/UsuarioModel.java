@@ -26,10 +26,10 @@ public class UsuarioModel {
     @Column
     private String telefone;
 
-    @Column
+    @Column (nullable = false, unique = true)
     private String login;
 
-    @Column
+    @Column(nullable = false)
     private String senha;
 
 }

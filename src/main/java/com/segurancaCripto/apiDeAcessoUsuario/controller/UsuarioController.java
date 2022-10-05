@@ -15,13 +15,13 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping(path = "/usuarios")
-    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(value = "/usuarios/create")
     public ResponseEntity<UsuarioModel> cadastrarUsuario(@RequestBody UsuarioModel usuarioModel){
-        return ResponseEntity.ok().body(usuarioService.cadastrarUsuarios(usuarioModel));
+        UsuarioModel novoUsuario = usuarioService.cadastrarUsuarios(usuarioModel);
+        return new ResponseEntity<>(novoUsuario, HttpStatus.CREATED);
     }
 
-    @GetMapping(path = "/usuarios")
+    @GetMapping(value = "/usuarios")
     public ResponseEntity<List<UsuarioModel>> buscarUsuariosCadastrados(){
         return ResponseEntity.ok().body(usuarioService.buscarTodosOsUsuariosCadastrados());
     }
