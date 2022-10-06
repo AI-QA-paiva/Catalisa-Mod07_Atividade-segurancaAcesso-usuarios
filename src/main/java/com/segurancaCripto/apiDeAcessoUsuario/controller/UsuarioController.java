@@ -1,5 +1,7 @@
 package com.segurancaCripto.apiDeAcessoUsuario.controller;
 
+import com.segurancaCripto.apiDeAcessoUsuario.dto.UsuarioRequestDto;
+import com.segurancaCripto.apiDeAcessoUsuario.dto.UsuarioResponseDto;
 import com.segurancaCripto.apiDeAcessoUsuario.model.UsuarioModel;
 import com.segurancaCripto.apiDeAcessoUsuario.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +18,14 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping(value = "/usuarios/create")
-    public ResponseEntity<UsuarioModel> cadastrarUsuario(@RequestBody UsuarioModel usuarioModel){
-        UsuarioModel novoUsuario = usuarioService.cadastrarUsuarios(usuarioModel);
-        return new ResponseEntity<>(novoUsuario, HttpStatus.CREATED);
+    public ResponseEntity<UsuarioResponseDto> cadastrarUsuario(@RequestBody UsuarioRequestDto usuarioRequestDto){
+       return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.cadastrarUsuarios(usuarioRequestDto));
     }
 
+
     @GetMapping(value = "/usuarios")
-    public ResponseEntity<List<UsuarioModel>> buscarUsuariosCadastrados(){
-        return ResponseEntity.ok().body(usuarioService.buscarTodosOsUsuariosCadastrados());
+    public ResponseEntity<List<UsuarioResponseDto>> buscarUsuariosCadastrados(){
+        return ResponseEntity.ok(usuarioService.buscarTodosOsUsuariosCadastrados());
     }
 
 
